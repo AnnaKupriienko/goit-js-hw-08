@@ -67,7 +67,7 @@ const images = [
 const gallery = document.querySelector(".gallery");
 gallery.innerHTML = createMurkup(images);
 
-function createMurkup(images) {
+function createMurkup(images){
    return images.map(({ preview, original, description }) =>
       `<li class="gallery-item">
   <a class="gallery-link" href="${original}">
@@ -80,10 +80,12 @@ function createMurkup(images) {
 </li>`
 ).join('')
 }
-// gallery.addEventListener("click", (event) => {
-//     if (event.target === event.currentTarget){
+gallery.addEventListener("click", (event) => {
+    event.preventDefault()
+    if (event.target === event.currentTarget){
+        return;
+    }
+    const card = event.target.closest('.gallery-item');
+    console.log(card)
     
-//     }
-
-// }
-// )
+})
