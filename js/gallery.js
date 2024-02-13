@@ -66,7 +66,7 @@ const images = [
 
 const gallery = document.querySelector(".gallery");
 gallery.innerHTML = createMurkup(images);
-
+let instance;
 function createMurkup(images){
    return images.map(({ preview, original, description }) =>
       `<li class="gallery-item">
@@ -90,12 +90,19 @@ gallery.addEventListener("click", (event) => {
   if (card) {
 const largeImg = card.getAttribute("href");
 const descriptionImg = card.getAttribute("alt");
-const instance = basicLightbox.create(`
+ instance = basicLightbox.create(`
 	<img
       class="gallery-image"
       src = "${largeImg}"
       alt= "${descriptionImg}"/>
-`).show()
+`)
+    instance.show()
   }
+  document.addEventListener("keyup", ({ code }) => {
+    if (code !== "Escape") {
+      return;
+    }
+  instance.close()
+  })
 });
 
