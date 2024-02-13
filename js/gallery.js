@@ -97,10 +97,5 @@ const instance = basicLightbox.create(`
       alt= "${descriptionImg}"/>
 `).show()
   }
-  document.addEventListener("keyup", (event) => {
-  if (event.code === "Escape" && instance && instance.visible()) {
-    instance.close()
-  }
-})
 });
 
