@@ -75,17 +75,32 @@ function createMurkup(images){
       class="gallery-image"
       src = "${preview}"
       data-source="${original}"
-      alt= "${description}" />
+      alt= "${description}"/>
   </a>
 </li>`
-).join('')
+).join("")
 }
+
 gallery.addEventListener("click", (event) => {
-    event.preventDefault()
-    if (event.target === event.currentTarget){
-        return;
-    }
-    const card = event.target.closest('.gallery-item');
-    console.log(card)
-    
+  event.preventDefault();
+  if (event.target === event.currentTarget) {
+    return;
+  }
+  const card = event.target.closest(".gallery-link");
+  if (card) {
+const largeImg = card.getAttribute("href");
+const descriptionImg = card.getAttribute("alt");
+const instance = basicLightbox.create(`
+	<img
+      class="gallery-image"
+      src = "${largeImg}"
+      alt= "${descriptionImg}"/>
+`).show()
+  }
+  document.addEventListener("keyup", (event) => {
+  if (event.code === "Escape" && instance && instance.visible()) {
+    instance.close()
+  }
 })
+});
+
